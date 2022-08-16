@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import { database } from "../firebase";
 
 const SideBar = () => {
-  console.log(database);
+  console.log(process.env.REACT_APP_apiKey);
   return (
     <Box
       sx={{

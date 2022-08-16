@@ -13,6 +13,17 @@ const firebaseConfig = {
   messagingSenderId: "304484469492",
   appId: "1:304484469492:web:ca7f33dbd5ef9c97506ca1",
   measurementId: "G-8M61MMRZ62",
+
+  // apiKey: process.env.REACT_APP_apiKey,
+  // authDomain: process.env.REACT_APP_authDomain,
+  // databaseURL: process.env.REACT_APP_databaseURL,
+  // projectId: process.env.REACT_APP_projectId,
+  // storageBucket: process.env.REACT_APP_storageBucket,
+  // messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  // appId: process.env.REACT_APP_appId,
+  // measurementId: process.env.REACT_APP_measurementId,
+
+  // env 를 진작에 사용했으나 적용이 안되어서 일단 주석처리
 };
 
 const app = initializeApp(firebaseConfig);

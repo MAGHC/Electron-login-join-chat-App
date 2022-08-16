@@ -2,13 +2,8 @@ import Grid from "@mui/material/Grid";
 import { FormControl, Box, TextField, Typography, Button } from "@mui/material";
 import { useState } from "react";
 import { logInWithEmailAndPassword } from "../firebase";
-import { useNavigate } from "react-router";
-
-console.log(process.env.REACT);
 
 const Login = () => {
-  const navigate = useNavigate();
-
   const [userInputValue, setUserInputValue] = useState({
     id: "",
     pw: "",
