@@ -1,6 +1,8 @@
 import Box from "@mui/material/Box";
+import { database } from "../firebase";
 
 const SideBar = () => {
+  console.log(database);
   return (
     <Box
       sx={{
