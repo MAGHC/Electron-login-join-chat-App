@@ -2,10 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Router from "./Router";
 import reportWebVitals from "./reportWebVitals";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
+    <CssBaseline />
     <Router></Router>
   </React.StrictMode>
 );
