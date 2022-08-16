@@ -1,16 +1,19 @@
-import Box from "@mui/material/Box";
-import { database } from "../firebase";
+import { Paper, Box } from "@mui/material";
 
 const SideBar = () => {
   console.log(process.env.REACT_APP_apiKey);
   return (
     <Box
       sx={{
-        width: "20rem",
+        width: "20vw",
         height: "100vh",
         backgroundColor: "primary.dark",
       }}
-    ></Box>
+    >
+      <Box sx={{ textAlign: "center" }}>
+        <Paper variant="outlined">Chat Channel List</Paper>
+      </Box>
+    </Box>
   );
 };
 
