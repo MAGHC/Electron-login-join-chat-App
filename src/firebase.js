@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import { removeToken, setToken } from "./utils";
 import { getAuth, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
 import { getFirestore, query, getDocs, collection, where, addDoc } from "firebase/firestore";
-import { getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBRdZ8gY1cpFePO51MBVupJkPe6UqDLSbo",
@@ -74,6 +73,5 @@ const logout = () => {
 };
 
 // 채팅 관련
-const database = getDatabase();
 
 export { database, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };
