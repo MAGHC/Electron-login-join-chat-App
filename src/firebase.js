@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { removeToken, setToken } from "./utils";
 import { getAuth, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
-import { getFirestore, query, getDocs, collection, where, addDoc } from "firebase/firestore";
+import { getFirestore, query, getDocs, collection, where, addDoc, serverTimestamp } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBRdZ8gY1cpFePO51MBVupJkPe6UqDLSbo",
@@ -74,4 +74,19 @@ const logout = () => {
 
 // 채팅 관련
 
-export { database, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };
+const user = auth.currentUser;
+
+const sendMessgae = async (message, channel) => {
+  try {
+    await addDoc(collection(db, "channels", channel, "messages"), {
+      message: message,
+      user: user.email,
+      createAt: serverTimestamp(),
+    });
+    console.log(user);
+  } catch (err) {
+    alert(err.message);
+  }
+};
+
+export { sendMessgae, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };
