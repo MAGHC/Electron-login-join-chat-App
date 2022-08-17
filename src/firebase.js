@@ -77,16 +77,19 @@ const logout = () => {
 const user = auth.currentUser;
 
 const sendMessgae = async (message, channel) => {
-  try {
-    await addDoc(collection(db, "channels", channel, "messages"), {
-      message: message,
-      user: user.email,
-      createAt: serverTimestamp(),
-    });
-    console.log(user);
-  } catch (err) {
-    alert(err.message);
+  if (user !== null) {
+    try {
+      await addDoc(collection(db, "channels", channel, "messages"), {
+        message: message,
+        user: user.email,
+        createAt: serverTimestamp(),
+      });
+    } catch (err) {
+      alert(err.message);
+    }
+  } else {
+    return;
   }
 };
 
-export { sendMessgae, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };
+export { user, sendMessgae, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };
