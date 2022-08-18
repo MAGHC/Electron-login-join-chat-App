@@ -92,9 +92,9 @@ const sendMessgae = async (message, channel) => {
   }
 };
 
-const getMessages = async (callback) => {
+const getMessages = async (callback, channel) => {
   try {
-    return onSnapshot(query(collection(db, "channels", "channel.1", "messages")), (querySnapshot) => {
+    return onSnapshot(query(collection(db, "channels", channel, "messages")), (querySnapshot) => {
       const messages = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
