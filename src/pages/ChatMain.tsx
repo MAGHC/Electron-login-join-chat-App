@@ -7,6 +7,8 @@ import { getMessages, addChaanel, getChannel } from "../firebase";
 
 type TypeChannel = { id: string };
 
+type TypeMessage = { message: string };
+
 const ChatMain = () => {
   const [messages, setMessages] = useState([]);
   const [channels, setChannels] = useState([]);
@@ -22,7 +24,7 @@ const ChatMain = () => {
   const handleNewChannel = () => {
     addChaanel(prompt());
   };
-  console.log(channels);
+  console.log(messages);
   return (
     <Box display="flex" width="100vw" height="100vh">
       <Box sx={{ float: "left" }}>
@@ -48,8 +50,13 @@ const ChatMain = () => {
         </Box>
       </Box>
       <Box display="flex" flexDirection="column">
-        <Box height="84vh" width="80vw" bgcolor="rgba(0, 0, 255, 0.5)">
-          <Message></Message>
+        <Box sx={{ overflowY: "scroll" }} height="84vh" width="80vw" bgcolor="rgba(0, 0, 255, 0.5)">
+          {messages &&
+            messages.map((message: TypeMessage) => (
+              <>
+                <Message message={message.message}></Message>
+              </>
+            ))}
         </Box>
         <SendChat></SendChat>
       </Box>
