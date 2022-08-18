@@ -108,14 +108,14 @@ const getMessages = async (callback, channel) => {
 
 const addChaanel = async (channelName) => {
   try {
-    await setDoc(doc(db, "channels", channelName), { channelName: channelName });
+    await setDoc(doc(db, "channels", channelName), { channelName: channelName, createAt: serverTimestamp() });
   } catch (err) {
     console.log(err.message);
   }
 };
 
 const getChannel = async (setData) => {
-  return onSnapshot(query(collection(db, "channels")), (querySnapshot) => {
+  return onSnapshot(query(collection(db, "channels"), orderBy("createAt")), (querySnapshot) => {
     const channels = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
