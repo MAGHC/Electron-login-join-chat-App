@@ -1,16 +1,20 @@
 // import SideBar from "../Components/SideBar";
 import SendChat from "../Components/SendChat";
 import Message from "../Components/Message";
-import { Box, Paper } from "@mui/material";
+import { Box, Paper, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getMessages } from "../firebase";
+import { getMessages, addChaanel } from "../firebase";
 
 const ChatMain = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    getMessages(setMessages, "channel.1");
+    getMessages(setMessages, "channel2");
   }, []);
+
+  const handleNewChannel = () => {
+    addChaanel(prompt());
+  };
   console.log(messages);
   return (
     <Box display="flex" width="100vw" height="100vh">
@@ -24,6 +28,9 @@ const ChatMain = () => {
         >
           <Box sx={{ textAlign: "center" }}>
             <Paper variant="outlined">Chat Channel List</Paper>
+            <Button onClick={handleNewChannel} variant="contained">
+              추가
+            </Button>
           </Box>
         </Box>
       </Box>

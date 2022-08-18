@@ -106,4 +106,14 @@ const getMessages = async (callback, channel) => {
   }
 };
 
-export { getMessages, user, sendMessgae, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };
+const addChaanel = async (channelName) => {
+  try {
+    await addDoc(collection(db, "channels", channelName, channelName), {
+      channelName: channelName,
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export { addChaanel, getMessages, user, sendMessgae, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };
