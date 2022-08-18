@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { removeToken, setToken } from "./utils";
-import { getAuth, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
-import { getFirestore, query, getDocs, collection, where, addDoc, serverTimestamp } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
+import { getFirestore, onSnapshot, doc, query, getDoc, collection, where, addDoc, serverTimestamp } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBRdZ8gY1cpFePO51MBVupJkPe6UqDLSbo",
@@ -92,4 +92,18 @@ const sendMessgae = async (message, channel) => {
   }
 };
 
-export { user, sendMessgae, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };
+const getMessages = async (callback) => {
+  try {
+    return onSnapshot(query(collection(db, "channels", "channel.1", "messages")), (querySnapshot) => {
+      const messages = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      callback(messages);
+    });
+  } catch (err) {
+    alert(err.message);
+  }
+};
+
+export { getMessages, user, sendMessgae, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };
