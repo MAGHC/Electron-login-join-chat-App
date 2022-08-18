@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { removeToken, setToken } from "./utils";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
-import { getFirestore, onSnapshot, doc, query, getDoc, collection, where, addDoc, serverTimestamp } from "firebase/firestore";
+import { getFirestore, onSnapshot, doc, query, getDoc, collection, where, addDoc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBRdZ8gY1cpFePO51MBVupJkPe6UqDLSbo",
@@ -77,19 +77,19 @@ const logout = () => {
 const user = auth.currentUser;
 
 const sendMessgae = async (message, channel) => {
-  if (user !== null) {
-    try {
-      await addDoc(collection(db, "channels", channel, "messages"), {
-        message: message,
-        user: user.email,
-        createAt: serverTimestamp(),
-      });
-    } catch (err) {
-      alert(err.message);
-    }
-  } else {
-    return;
+  // if (user !== null) {
+  try {
+    await addDoc(collection(db, "channels", channel, "messages"), {
+      message: message,
+      // user: user.email,
+      createAt: serverTimestamp(),
+    });
+  } catch (err) {
+    alert(err.message);
   }
+  // } else {
+  //   return;
+  // }
 };
 
 const getMessages = async (callback, channel) => {
@@ -108,12 +108,20 @@ const getMessages = async (callback, channel) => {
 
 const addChaanel = async (channelName) => {
   try {
-    await addDoc(collection(db, "channels", channelName, channelName), {
-      channelName: channelName,
-    });
+    await setDoc(doc(db, "channels", channelName), { channelName: channelName });
   } catch (err) {
     console.log(err.message);
   }
 };
 
-export { addChaanel, getMessages, user, sendMessgae, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };
+const getChannel = async (setData) => {
+  return onSnapshot(query(collection(db, "channels")), (querySnapshot) => {
+    const channels = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setData(channels);
+  });
+};
+
+export { getChannel, addChaanel, getMessages, user, sendMessgae, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };

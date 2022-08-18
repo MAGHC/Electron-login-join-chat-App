@@ -9,7 +9,7 @@ const SendChat = () => {
     if (message == "") {
       alert("공백은 허용되지않습니다");
     } else {
-      sendMessgae(message, "channel2");
+      sendMessgae(message, "테스트");
       setMessage("");
     }
   };

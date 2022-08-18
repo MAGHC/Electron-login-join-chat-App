@@ -3,19 +3,24 @@ import SendChat from "../Components/SendChat";
 import Message from "../Components/Message";
 import { Box, Paper, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getMessages, addChaanel } from "../firebase";
+import { getMessages, addChaanel, getChannel } from "../firebase";
 
 const ChatMain = () => {
   const [messages, setMessages] = useState([]);
+  const [channels, setChannels] = useState();
 
   useEffect(() => {
-    getMessages(setMessages, "channel2");
+    getMessages(setMessages, "테스트");
+  }, []);
+
+  useEffect(() => {
+    getChannel(setChannels);
   }, []);
 
   const handleNewChannel = () => {
     addChaanel(prompt());
   };
-  console.log(messages);
+  console.log(channels);
   return (
     <Box display="flex" width="100vw" height="100vh">
       <Box sx={{ float: "left" }}>
