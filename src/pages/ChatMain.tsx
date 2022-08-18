@@ -1,13 +1,15 @@
-// import SideBar from "../Components/SideBar";
+import Channel from "../Components/Channel";
 import SendChat from "../Components/SendChat";
 import Message from "../Components/Message";
 import { Box, Paper, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getMessages, addChaanel, getChannel } from "../firebase";
 
+type TypeChannel = { id: string };
+
 const ChatMain = () => {
   const [messages, setMessages] = useState([]);
-  const [channels, setChannels] = useState();
+  const [channels, setChannels] = useState([]);
 
   useEffect(() => {
     getMessages(setMessages, "테스트");
@@ -36,6 +38,12 @@ const ChatMain = () => {
             <Button onClick={handleNewChannel} variant="contained">
               추가
             </Button>
+            {channels &&
+              channels.map((channel: TypeChannel) => (
+                <>
+                  <Channel channelName={channel.id} key={channel.id}></Channel>
+                </>
+              ))}
           </Box>
         </Box>
       </Box>
