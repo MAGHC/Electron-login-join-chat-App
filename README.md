@@ -9,7 +9,7 @@ firebase 를 활용한 로그인 / 회원가입  & chat  desktop 어플리케이
 
 
 ## 진행 사항 
-  ~2022.08.15- 기본 electron 세팅 및 mui 사용 login / join 페이지 생성 기본 디자인 
+  ~2022.08.15- 기본 electron 세팅 및 mui 사용 login / join 페이지 생성 기본 디자인 <br><br>
 2022.08.16 - 자체 이메일 로그인 회원가입 / jwt 토큰 / firebas auth / 로그아웃  기능 구현 만 완료  완료 후 이동 view  , auth provider 등 미결 문제들 있음 <br><br>
 2022.08.17 - send message 데이터 구조 생성 및 데이터 베이스에 추가 & 들어간 메세지들 실시간 감시 , get method 구현 console 에서 확인 <br><br>
 2022.08.18 - 채널 생성에 따른  messages 데이터 객체 수정 / 채널 생성 버튼 및 채널 실시간 감시 , get , firestore에 쌓인 데이터 orderby 로 시간 순 정렬 / 시간 순 정렬을 위해 채널 객체에도 만든 시간 추가  , message 에 ref 추가 자동으로 focus 스크롤 내려오게 구현 <br><br>
