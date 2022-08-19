@@ -29,9 +29,9 @@ const Message = ({
         </Box>
       ) : (
         <Box sx={{ display: "flex", justifyContent: "flex-start" }} ref={messageComponent}>
-          <Card sx={{ width: "50%", margin: ".5rem 0" }} variant="outlined">
+          <Card sx={{ width: "45%", margin: ".5rem .5rem" }} variant="outlined">
             <pre>{message}</pre>
-            <Box sx={{ paddingRight: "1rem", textAlign: "right" }}>by {displayName}</Box>
+            <Box sx={{ paddingRight: "1rem", textAlign: "left" }}>by {displayName}</Box>
           </Card>
         </Box>
       )}
