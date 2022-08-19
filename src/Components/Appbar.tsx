@@ -17,16 +17,11 @@ export default function ButtonAppBar() {
     Auth(setValidLogin);
   }, [validLogin]);
 
-  console.log(validLogin);
-
   const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1, marginBottom: "1rem" }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             AssignMent
           </Typography>
@@ -57,6 +52,8 @@ export default function ButtonAppBar() {
               color="inherit"
               onClick={() => {
                 logout();
+                setValidLogin(null);
+                navigate("/");
               }}
             >
               LogOut

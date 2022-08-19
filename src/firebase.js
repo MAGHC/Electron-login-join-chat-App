@@ -33,7 +33,9 @@ const db = getFirestore(app);
 
 const logInWithEmailAndPassword = async (email, password) => {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, password).then(() => {
+      window.location.href = "/chatmain";
+    });
   } catch (err) {
     alert(err.message);
   }

@@ -3,8 +3,11 @@ import { FormControl, Box, TextField, Typography, Button } from "@mui/material";
 import { useState } from "react";
 import { logInWithEmailAndPassword } from "../firebase";
 import Appbar from "../Components/Appbar";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [userInputValue, setUserInputValue] = useState({
     id: "",
     pw: "",
