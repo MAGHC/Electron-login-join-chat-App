@@ -40,6 +40,8 @@ const ChatMain = () => {
     setChangedChannel(channelchange);
   };
 
+  console.log(messages);
+
   return (
     <Box display="flex" width="100vw" height="100vh">
       <Box sx={{ float: "left" }}>

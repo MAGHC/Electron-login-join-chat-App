@@ -24,7 +24,7 @@ const Join = () => {
   });
 
   const register = () => {
-    registerWithEmailAndPassword(userJoinValue.id, userJoinValue.id, userJoinValue.pw);
+    registerWithEmailAndPassword(userJoinValue.userName, userJoinValue.id, userJoinValue.pw);
   };
 
   const isValidButton =
