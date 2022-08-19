@@ -8,14 +8,14 @@ import Auth from "../Auth";
 
 type TypeChannel = { id: string };
 
-type TypeMessage = { message: string };
+type TypeMessage = { message: string; displayName: string };
 
 type changeChannel = string;
 
 const ChatMain = () => {
   const [messages, setMessages] = useState([]);
   const [channels, setChannels] = useState([]);
-  const [changedChannel, setChangedChannel] = useState("테스트");
+  const [changedChannel, setChangedChannel] = useState("신규");
   const [userState, setUserState] = useState({});
 
   console.log(userState);
@@ -40,7 +40,7 @@ const ChatMain = () => {
     setChangedChannel(channelchange);
   };
 
-  console.log(messages);
+  // console.log(messages);
 
   return (
     <Box display="flex" width="100vw" height="100vh">
@@ -71,7 +71,7 @@ const ChatMain = () => {
           {messages &&
             messages.map((message: TypeMessage) => (
               <>
-                <Message message={message.message}></Message>
+                <Message userState={userState} displayName={message.displayName} message={message.message}></Message>
               </>
             ))}
         </Box>

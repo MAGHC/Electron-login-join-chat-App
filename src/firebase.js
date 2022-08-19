@@ -79,7 +79,7 @@ const sendMessgae = async (message, channel, user) => {
   try {
     await addDoc(collection(db, "channels", channel, "messages"), {
       message: message,
-      user: user.email,
+      displayName: user.displayName,
       createAt: serverTimestamp(),
     });
   } catch (err) {
