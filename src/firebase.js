@@ -73,19 +73,15 @@ const logout = () => {
 
 const user = auth.currentUser;
 
-const sendMessgae = async (message, channel) => {
-  if (user !== null) {
-    try {
-      await addDoc(collection(db, "channels", channel, "messages"), {
-        message: message,
-        user: user.email,
-        createAt: serverTimestamp(),
-      });
-    } catch (err) {
-      alert(err.message);
-    }
-  } else {
-    return;
+const sendMessgae = async (message, channel, user) => {
+  try {
+    await addDoc(collection(db, "channels", channel, "messages"), {
+      message: message,
+      user: user.email,
+      createAt: serverTimestamp(),
+    });
+  } catch (err) {
+    alert(err.message);
   }
 };
 

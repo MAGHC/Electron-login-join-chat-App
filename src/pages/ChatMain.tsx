@@ -4,6 +4,7 @@ import Message from "../Components/Message";
 import { Box, Paper, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getMessages, addChaanel, getChannel } from "../firebase";
+import Auth from "../Auth";
 
 type TypeChannel = { id: string };
 
@@ -15,6 +16,13 @@ const ChatMain = () => {
   const [messages, setMessages] = useState([]);
   const [channels, setChannels] = useState([]);
   const [changedChannel, setChangedChannel] = useState("테스트");
+  const [userState, setUserState] = useState({});
+
+  console.log(userState);
+
+  useEffect(() => {
+    Auth(setUserState);
+  }, [userState]);
 
   useEffect(() => {
     getMessages(setMessages, changedChannel);
@@ -65,7 +73,7 @@ const ChatMain = () => {
               </>
             ))}
         </Box>
-        <SendChat changedChannel={changedChannel}></SendChat>
+        <SendChat userState={userState} changedChannel={changedChannel}></SendChat>
       </Box>
     </Box>
   );
