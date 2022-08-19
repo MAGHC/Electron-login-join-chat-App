@@ -2,14 +2,14 @@ import { Box, FormControl, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { sendMessgae } from "../firebase";
 
-const SendChat = () => {
+const SendChat = ({ changedChannel }: { changedChannel: string }) => {
   const [message, setMessage] = useState("");
 
   const submitMessage = () => {
     if (message == "") {
       alert("공백은 허용되지않습니다");
     } else {
-      sendMessgae(message, "테스트");
+      sendMessgae(message, changedChannel);
       setMessage("");
     }
   };
@@ -17,7 +17,6 @@ const SendChat = () => {
   const changeMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setMessage(value);
-    console.log(message);
   };
 
   return (

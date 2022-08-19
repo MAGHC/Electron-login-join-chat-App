@@ -2,20 +2,23 @@ import Channel from "../Components/Channel";
 import SendChat from "../Components/SendChat";
 import Message from "../Components/Message";
 import { Box, Paper, Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getMessages, addChaanel, getChannel } from "../firebase";
 
 type TypeChannel = { id: string };
 
 type TypeMessage = { message: string };
 
+type changeChannel = string;
+
 const ChatMain = () => {
   const [messages, setMessages] = useState([]);
   const [channels, setChannels] = useState([]);
+  const [changedChannel, setChangedChannel] = useState("테스트");
 
   useEffect(() => {
-    getMessages(setMessages, "테스트");
-  }, []);
+    getMessages(setMessages, changedChannel);
+  }, [changedChannel]);
 
   useEffect(() => {
     getChannel(setChannels);
@@ -24,7 +27,11 @@ const ChatMain = () => {
   const handleNewChannel = () => {
     addChaanel(prompt());
   };
-  console.log(messages);
+
+  const handleUpdateChannel = (channelchange: string) => {
+    setChangedChannel(channelchange);
+  };
+
   return (
     <Box display="flex" width="100vw" height="100vh">
       <Box sx={{ float: "left" }}>
@@ -43,7 +50,7 @@ const ChatMain = () => {
             {channels &&
               channels.map((channel: TypeChannel) => (
                 <>
-                  <Channel channelName={channel.id} key={channel.id}></Channel>
+                  <Channel handleUpdateChannel={handleUpdateChannel} channelName={channel.id} key={channel.id}></Channel>
                 </>
               ))}
           </Box>
@@ -58,7 +65,7 @@ const ChatMain = () => {
               </>
             ))}
         </Box>
-        <SendChat></SendChat>
+        <SendChat changedChannel={changedChannel}></SendChat>
       </Box>
     </Box>
   );

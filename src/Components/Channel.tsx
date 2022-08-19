@@ -1,10 +1,16 @@
-import { Card } from "@mui/material";
+import { Card, Button } from "@mui/material";
 
-const Channel = ({ channelName }: { channelName: string }) => {
+const Channel = ({ channelName, handleUpdateChannel }: { channelName: string; handleUpdateChannel: Function }) => {
   return (
-    <Card variant="outlined" sx={{ margin: "1rem  0", width: "100%", height: "2rem" }}>
+    <Button
+      onClick={() => {
+        handleUpdateChannel(channelName);
+      }}
+      variant="contained"
+      sx={{ margin: "1rem  0", width: "100%", height: "2rem" }}
+    >
       채널명 : {channelName}
-    </Card>
+    </Button>
   );
 };
 
