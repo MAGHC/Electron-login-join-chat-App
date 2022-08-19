@@ -3,6 +3,7 @@ import { FormControl, Box, TextField, Typography, Button } from "@mui/material";
 import { useState } from "react";
 import { logInWithEmailAndPassword } from "../firebase";
 import Appbar from "../Components/Appbar";
+import Auth from "../Auth";
 
 const Login = () => {
   const [userInputValue, setUserInputValue] = useState({

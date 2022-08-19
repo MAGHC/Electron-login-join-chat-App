@@ -33,12 +33,8 @@ const db = getFirestore(app);
 
 const logInWithEmailAndPassword = async (email, password) => {
   try {
-    await signInWithEmailAndPassword(auth, email, password).then((res) => {
-      const resToken = res.user.accessToken;
-      setToken(resToken);
-    });
+    await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
-    console.error(err);
     alert(err.message);
   }
 };
@@ -77,19 +73,19 @@ const logout = () => {
 const user = auth.currentUser;
 
 const sendMessgae = async (message, channel) => {
-  // if (user !== null) {
-  try {
-    await addDoc(collection(db, "channels", channel, "messages"), {
-      message: message,
-      // user: user.email,
-      createAt: serverTimestamp(),
-    });
-  } catch (err) {
-    alert(err.message);
+  if (user !== null) {
+    try {
+      await addDoc(collection(db, "channels", channel, "messages"), {
+        message: message,
+        user: user.email,
+        createAt: serverTimestamp(),
+      });
+    } catch (err) {
+      alert(err.message);
+    }
+  } else {
+    return;
   }
-  // } else {
-  //   return;
-  // }
 };
 
 const getMessages = async (callback, channel) => {
