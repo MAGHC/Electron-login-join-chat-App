@@ -1,19 +1,15 @@
 import { auth } from "./firebase";
 
-import { useState } from "react";
-
-const Auth = () => {
-  const [userState, setUserState] = useState<object | null>(null);
-
+const Auth = (setState: Function) => {
   auth.onAuthStateChanged((user) => {
     if (user) {
-      setUserState(user);
+      setState(user);
     } else {
-      setUserState(null);
+      return;
     }
   });
 
-  return userState;
+  return;
 };
 
 export default Auth;

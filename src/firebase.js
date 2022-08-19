@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { removeToken, setToken } from "./utils";
+
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from "firebase/auth";
 import { getFirestore, onSnapshot, doc, query, orderBy, getDoc, collection, where, addDoc, serverTimestamp, setDoc } from "firebase/firestore";
 
@@ -65,7 +65,6 @@ const sendPasswordReset = async (email) => {
 
 const logout = () => {
   signOut(auth);
-  removeToken();
 };
 
 // 채팅 관련
