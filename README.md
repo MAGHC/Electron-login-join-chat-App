@@ -1,6 +1,6 @@
-# Electron-login-join-chat-App
+# Electron-login-join-chat-App(with firebase )
 
-with firebase 
+
 
 
 firebase 를 활용한 로그인 / 회원가입  & chat  desktop 어플리케이션  제작 repo <br><br>
