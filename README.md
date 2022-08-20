@@ -98,7 +98,7 @@ session stroage 나 refresh token 같은것들의 개념은 알고 있고 fireba
 <b>1. fireStore/ RealTime database</b> 
 
 
-이미 한번 sendbird api를 통해 채팅을 구현했던 경험이 있었고 당시에 vue로 구현 하는데 있어 sendbird 가 vue를 공식적으로 지원하지 않아 그냥 로컬로 내가 만들어야 되나 싶어 찾아보다가 소켓 개념까지 얼추 알고있었기에  firebase에 실시간 데이터 베이스와 firestore 두가지 가 있는데 당연히 RealTime을 써야 되지 않을까 하고 있다가 한 번 찾아보기로 했다.
+이미 한번 sendbird api를 통해 채팅을 구현했던 경험이 있었고 당시에 vue로 구현 하는데 있어 sendbird 가 vue를 공식적으로 지원하지 않아 그냥 로컬로 내가 만들어야 되나 싶어 찾아보다가 소켓 개념까지 얼추 알고있었기에 이런 부분을 염두해두고  firebase에 실시간 데이터 베이스와 firestore 두가지 가 있는데 뭘 선택해야되는지 고민이 있었다. 당연히 RealTime을 써야 되지 않을까 하고 있다가 한 번 찾아보기로 했다.
 
 원래 태초에는 의외로 실시간 데이터 베이스가 먼저 존재했다고 한다. 뭐 어떤 목적으로 쓸 건지 같은것들 에따라 다르지만 fireStore 가 조금 더 개선 된 버젼이라는 말을 볼 수 있었다. 
 
