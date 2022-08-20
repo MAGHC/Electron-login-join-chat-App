@@ -70,6 +70,14 @@ firebase 를 활용한 로그인 / 회원가입  & chat  desktop 어플리케이
 
 외려 모든 user 의 정보 같은것들을 형성 시킬때 내가 구성한 정보들 내가 구성한 객체들로 만든다는 것이 굉장히 재미있었다.<br><br>
 
+![image](https://user-images.githubusercontent.com/89845540/185728204-ae132261-de51-4fc2-bd63-b88062a271ed.png)
+
+나의 user.... 나의 test 분신들 제공업체 이메일 표시는 자체 이메일로 회원가입 시킨 것들이라 그렇다. 구글 이면 구글모양 있음 
+
+<br>
+<br>
+
+
 
 <b>2. 인증 유지 / provider</b>
 
