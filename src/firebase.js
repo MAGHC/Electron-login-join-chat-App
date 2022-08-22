@@ -48,6 +48,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       uid: user.uid,
       authProvider: "local",
       email,
+      displayName: name,
     });
     await updateProfile(auth.currentUser, {
       displayName: name,
@@ -71,9 +72,7 @@ const logout = () => {
   signOut(auth);
 };
 
-// 채팅 관련
-
-const user = auth.currentUser;
+// 메세지 기능
 
 const sendMessgae = async (message, channel, user) => {
   try {
@@ -101,6 +100,8 @@ const getMessages = async (callback, channel) => {
   }
 };
 
+// 채널 기능
+
 const addChaanel = async (channelName) => {
   try {
     await setDoc(doc(db, "channels", channelName), { channelName: channelName, createAt: serverTimestamp() });
@@ -120,4 +121,28 @@ const getChannel = async (setData) => {
   });
 };
 
-export { getChannel, addChaanel, getMessages, user, sendMessgae, auth, db, logInWithEmailAndPassword, registerWithEmailAndPassword, sendPasswordReset, logout };
+// 유저 리스트
+
+const getUserList = async (setData) => {
+  return onSnapshot(query(collection(db, "users")), (querySnapshot) => {
+    const users = querySnapshot.docs.map((doc) => ({
+      name: doc.data().displayName,
+    }));
+
+    setData(users);
+  });
+};
+
+export {
+  getChannel,
+  addChaanel,
+  getMessages,
+  getUserList,
+  sendMessgae,
+  auth,
+  db,
+  logInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+  sendPasswordReset,
+  logout,
+};

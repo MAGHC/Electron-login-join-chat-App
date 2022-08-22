@@ -3,22 +3,19 @@ import SendChat from "../Components/SendChat";
 import Message from "../Components/Message";
 import { Box, Paper, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { getMessages, addChaanel, getChannel } from "../firebase";
+import { getMessages, addChaanel, getChannel, getUserList } from "../firebase";
 import Auth from "../Auth";
 
 type TypeChannel = { id: string };
 
 type TypeMessage = { message: string; displayName: string };
 
-type changeChannel = string;
-
 const ChatMain = () => {
   const [messages, setMessages] = useState([]);
   const [channels, setChannels] = useState([]);
   const [changedChannel, setChangedChannel] = useState("신규");
   const [userState, setUserState] = useState({});
-
-  console.log(userState);
+  const [userList, setUserList] = useState();
 
   useEffect(() => {
     Auth(setUserState);
@@ -30,6 +27,10 @@ const ChatMain = () => {
 
   useEffect(() => {
     getChannel(setChannels);
+  }, []);
+
+  useEffect(() => {
+    getUserList(setUserList);
   }, []);
 
   const handleNewChannel = () => {
@@ -56,6 +57,15 @@ const ChatMain = () => {
             <Paper variant="outlined">Chat Channel List</Paper>
             <Button onClick={handleNewChannel} variant="contained">
               추가
+            </Button>
+            <Button
+              sx={{ marginLeft: "1rem" }}
+              onClick={() => {
+                console.log(userList);
+              }}
+              variant="contained"
+            >
+              유저목록
             </Button>
             {channels &&
               channels.map((channel: TypeChannel) => (
