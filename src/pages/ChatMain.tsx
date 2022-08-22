@@ -2,7 +2,7 @@ import Channel from "../Components/Channel";
 import SendChat from "../Components/SendChat";
 import Message from "../Components/Message";
 import UserList from "../Components/UserList";
-import { Box, Paper, Button, Card } from "@mui/material";
+import { Box, Paper, Button, Card, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getMessages, addChaanel, getChannel, getUserList } from "../firebase";
 import Auth from "../Auth";
@@ -22,6 +22,7 @@ const ChatMain = () => {
   const [userState, setUserState] = useState({});
   const [userList, setUserList] = useState([]);
   const [modalStatus, setModalStatus] = useState(false);
+  const [searchUser, setSearchUser] = useState("");
 
   // auth
 
@@ -57,6 +58,12 @@ const ChatMain = () => {
     setModalStatus(status);
   };
 
+  const handleSearchUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearchUser(value);
+  };
+  const searchUserName = userList.filter((user: TypeUserList) => user.name.includes(searchUser));
+
   return (
     <Box display="flex" width="100vw" height="100vh">
       {modalStatus && userList && (
@@ -72,8 +79,9 @@ const ChatMain = () => {
             <Box margin="1rem" bgcolor="white" textAlign="center">
               유 저 목 록
             </Box>
-            {userList.map((user: TypeUserList) => (
-              <UserList username={user.name}></UserList>
+            <TextField onChange={handleSearchUser} value={searchUser}></TextField>
+            {searchUserName.map((user: TypeUserList) => (
+              <UserList key={user.name} user={user}></UserList>
             ))}
             <Button sx={{ alignSelf: "self-end" }}>보내기</Button>
           </Card>

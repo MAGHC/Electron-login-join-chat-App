@@ -2,10 +2,10 @@ import { Box, Checkbox, Paper } from "@mui/material";
 import { useState } from "react";
 
 interface TypeUserList {
-  name: string;
+  name?: string;
 }
 
-const UserList = ({ username }: { username: string }) => {
+const UserList = ({ user }: { user: TypeUserList }) => {
   const [userCheck, setUserCheck] = useState(false);
 
   console.log(userCheck);
@@ -15,9 +15,9 @@ const UserList = ({ username }: { username: string }) => {
         onClick={() => {
           setUserCheck(!userCheck);
         }}
-        value={username}
+        value={user.name}
       ></Checkbox>
-      {username}
+      {user.name}
     </Paper>
   );
 };
