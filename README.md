@@ -15,6 +15,8 @@ firebase 를 활용한 로그인 / 회원가입  & chat  desktop 어플리케이
 2022.08.18 - 채널 생성에 따른  messages 데이터 객체 수정 / 채널 생성 버튼 및 채널 실시간 감시 , get , firestore에 쌓인 데이터 orderby 로 시간 순 정렬 / 시간 순 정렬을 위해 채널 객체에도 만든 시간 추가  , message 에 ref 추가 자동으로 focus 스크롤 내려오게 구현 <br><br>
 2022.08.19 - login , join 데이터 베이스 전송 displayname 수정  userlogin provider 생성 , login 유지 토큰 말고 다른 방법으로 로직 변경 , meesage 본인 과 타인에 따른 상태변경 및확인, channel 변경 구현  <br><br>
 
+2022.08.22 - userList 불러오기 / 로그인시 user id/ name / email 정보만 따로 users 생성하여 저장 / test modal view 구현  현재 체크 해서 value 전송해서 초기 채널 init 시에 초대되어있다면 채팅방 자동 생성 되어있게 끔 구현중 , 방식 생각 중 user list 데려올때 자기 자신 달라보이게 끔 하기 등등 아직 많이 남음 
+
 
 
 <br><br><br>
