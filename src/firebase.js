@@ -105,6 +105,7 @@ const getMessages = async (callback, channel) => {
 const addChaanel = async (channelName) => {
   try {
     await setDoc(doc(db, "channels", channelName), { channelName: channelName, createAt: serverTimestamp() });
+    await addDoc(collection(db, "channels", channelName, "users"), {});
   } catch (err) {
     console.log(err.message);
   }

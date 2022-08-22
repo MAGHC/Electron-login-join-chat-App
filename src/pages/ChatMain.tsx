@@ -75,6 +75,7 @@ const ChatMain = () => {
             {userList.map((user: TypeUserList) => (
               <UserList username={user.name}></UserList>
             ))}
+            <Button sx={{ alignSelf: "self-end" }}>보내기</Button>
           </Card>
         </Box>
       )}
