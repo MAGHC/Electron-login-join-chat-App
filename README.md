@@ -3,7 +3,7 @@
 
 
 
-firebase 를 활용한 로그인 / 회원가입  & chat  desktop 어플리케이션  제작 repo  <br>
+firebase 와 react (withTs)를 활용한 백엔드 프론트엔드 구현 =>  로그인 / 회원가입  & chat  desktop 어플리케이션  제작 repo  <br>
 디자인 : mui 사용 
 <br><br><br>
 
