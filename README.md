@@ -123,8 +123,34 @@ const PW_REG = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
  ```
  
  
+ - firebase
+ 
+ 
+ ```js
+ 
+ 
+const registerWithEmailAndPassword = async (name, email, password) => {
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const user = res.user;
+    await addDoc(collection(db, "users"), {
+      uid: user.uid,
+      authProvider: "local",
+      email,
+      displayName: name,
+    });
+    await updateProfile(auth.currentUser, {
+      displayName: name,
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+ ```
  
 
+![image](https://user-images.githubusercontent.com/89845540/186073047-20dd1f61-bdc3-4836-9205-08eb0f64a5e5.png)
 
 
 
