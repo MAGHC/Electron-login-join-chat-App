@@ -24,7 +24,7 @@ const ChatMain = () => {
   const [modalStatus, setModalStatus] = useState(false);
   const [searchUser, setSearchUser] = useState("");
 
-  // auth
+  // auth user
 
   useEffect(() => {
     Auth(setUserState);
@@ -64,6 +64,7 @@ const ChatMain = () => {
   };
   const searchUserName = userList.filter((user: TypeUserList) => user.name.includes(searchUser));
 
+  console.log(channels);
   return (
     <Box display="flex" width="100vw" height="100vh">
       {modalStatus && userList && (

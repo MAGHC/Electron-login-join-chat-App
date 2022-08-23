@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, updateProfile } from "firebase/auth";
 import { getFirestore, onSnapshot, doc, query, orderBy, getDoc, collection, where, addDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { sortAndDeduplicateDiagnostics } from "typescript";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBRdZ8gY1cpFePO51MBVupJkPe6UqDLSbo",
@@ -53,6 +54,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
     await updateProfile(auth.currentUser, {
       displayName: name,
     });
+    await initChannel(auth.currentUser.email, auth.currentUser.displayName);
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -102,6 +104,21 @@ const getMessages = async (callback, channel) => {
 
 // 채널 기능
 
+const initChannel = async (uid, username) => {
+  try {
+    await setDoc(doc(db, "channels", uid), {
+      channelName: "나와의채팅",
+      createAt: serverTimestamp(),
+    });
+    await addDoc(collection(db, "channels", uid, "users"), {
+      uid: uid,
+      username: username,
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 const addChaanel = async (channelName) => {
   try {
     await setDoc(doc(db, "channels", channelName), { channelName: channelName, createAt: serverTimestamp() });
@@ -132,6 +149,14 @@ const getUserList = async (setData) => {
 
     setData(users);
   });
+};
+
+const addChannelUser = async () => {
+  try {
+    await addDoc();
+  } catch (err) {
+    console.log(err.message);
+  }
 };
 
 export {
