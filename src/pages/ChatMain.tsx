@@ -18,7 +18,7 @@ type TypeMessage = { message: string; displayName: string };
 const ChatMain = () => {
   const [messages, setMessages] = useState([]);
   const [channels, setChannels] = useState([]);
-  const [changedChannel, setChangedChannel] = useState("신규");
+  const [changedChannel, setChangedChannel] = useState("empty");
   const [userState, setUserState] = useState({});
   const [userList, setUserList] = useState([]);
   const [modalStatus, setModalStatus] = useState(false);
@@ -81,9 +81,11 @@ const ChatMain = () => {
               유 저 목 록
             </Box>
             <TextField onChange={handleSearchUser} value={searchUser}></TextField>
+
             {searchUserName.map((user: TypeUserList) => (
               <UserList key={user.name} user={user}></UserList>
             ))}
+
             <Button sx={{ alignSelf: "self-end" }}>보내기</Button>
           </Card>
         </Box>

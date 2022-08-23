@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, updateProfile } from "firebase/auth";
 import { getFirestore, onSnapshot, doc, query, orderBy, getDoc, collection, where, addDoc, serverTimestamp, setDoc } from "firebase/firestore";
-import { sortAndDeduplicateDiagnostics } from "typescript";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBRdZ8gY1cpFePO51MBVupJkPe6UqDLSbo",
@@ -110,10 +109,17 @@ const initChannel = async (uid, username) => {
       channelName: "나와의채팅",
       createAt: serverTimestamp(),
     });
-    await addDoc(collection(db, "channels", uid, "users"), {
-      uid: uid,
-      username: username,
-    });
+    await setDoc(
+      doc(db, "channels", uid),
+
+      {
+        users: {
+          uid: uid,
+          username: username,
+        },
+      },
+      { merge: true }
+    );
   } catch (err) {
     console.log(err.message);
   }
@@ -134,10 +140,18 @@ const getChannel = async (setData) => {
       id: doc.id,
       ...doc.data(),
     }));
-
     setData(channels);
   });
 };
+
+// const setChannel = async (setData) => {
+//   return onSnapshot(query(collection(db, "channels"), orderBy("createAt")), (querySnapshot) => {
+//     const channels = querySnapshot.docs.map((doc) => ({
+//       ...doc.data(),
+//     })).filter(channel =>);
+
+//   });
+// };
 
 // 유저 리스트
 
@@ -151,13 +165,13 @@ const getUserList = async (setData) => {
   });
 };
 
-const addChannelUser = async () => {
-  try {
-    await addDoc();
-  } catch (err) {
-    console.log(err.message);
-  }
-};
+// const addChannelUser = async () => {
+//   try {
+//     await addDoc();
+//   } catch (err) {
+//     console.log(err.message);
+//   }
+// };
 
 export {
   getChannel,
