@@ -58,6 +58,92 @@ firebase 와 react (withTs)를 활용한 백엔드 프론트엔드 구현 =>  �
 
 ```
 
+
+## 구현사항 (page 별)
+
+### Login 
+
+<br>
+<br>
+
+기본 validation 에 따른 button 활성 / 비활성화 
+
+설정한 validation과 별개로 firebase 에서 유효하지않은 id / pw 면 로그인 불가 
+
+<br>
+<br>
+
+
+<br>
+
+![이미지 003](https://user-images.githubusercontent.com/89845540/186070149-2061891c-0306-4a35-9407-c502f91332c9.gif)
+
+
+
+
+``` JS
+
+  const Validation = userInputValue.id && userInputValue.pw.length > 6;
+
+``` 
+
+<br>
+
+
+
+
+<br>
+
+### Join 
+
+<br>
+- 프론트 
+join 페이지와는 다른 validation 적용  (정규식)
+
+
+https://user-images.githubusercontent.com/89845540/186070396-c50c6c64-3468-4f17-b456-e0b0719cefd5.mp4
+
+
+
+
+```js
+
+const PW_REG = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  const EMAIL_REG =
+    /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+
+```
+<br>
+
+```js
+
+   PW_REG.test(userJoinValue.pw)
+ 
+ 
+ ```
+ 
+ 
+ 
+
+
+
+
+
+### ChatMain 
+
+
+
+
+https://user-images.githubusercontent.com/89845540/186070510-a42fa895-6a2d-4c78-a2c7-46a2d817210e.mp4
+
+
+
+
+
+
+
+
+
 <br><br>
 ##  구현하면서 우여곡절 & 느낀 점 
 <br><br>
