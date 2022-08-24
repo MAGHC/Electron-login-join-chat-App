@@ -3,19 +3,13 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router";
 import { logout } from "../firebase";
-import { useEffect, useState } from "react";
-// import Auth from "../Auth";
+
+import { useAuth } from "../Auth";
 
 export default function ButtonAppBar() {
-  const [validLogin, setValidLogin] = useState<Object | null>(null);
-
-  // useEffect(() => {
-  //   Auth(setValidLogin);
-  // }, [validLogin]);
+  let auth = useAuth();
 
   const navigate = useNavigate();
   return (
@@ -25,7 +19,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             AssignMent
           </Typography>
-          {!true ? (
+          {!auth.isAuthenticated ? (
             <>
               <Button
                 sx={{ backgroundColor: "primary.dark" }}
@@ -52,7 +46,6 @@ export default function ButtonAppBar() {
               color="inherit"
               onClick={() => {
                 logout();
-                setValidLogin(null);
                 navigate("/");
               }}
             >
