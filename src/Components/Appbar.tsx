@@ -8,14 +8,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router";
 import { logout } from "../firebase";
 import { useEffect, useState } from "react";
-import Auth from "../Auth";
+// import Auth from "../Auth";
 
 export default function ButtonAppBar() {
   const [validLogin, setValidLogin] = useState<Object | null>(null);
 
-  useEffect(() => {
-    Auth(setValidLogin);
-  }, [validLogin]);
+  // useEffect(() => {
+  //   Auth(setValidLogin);
+  // }, [validLogin]);
 
   const navigate = useNavigate();
   return (
@@ -25,7 +25,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             AssignMent
           </Typography>
-          {!validLogin ? (
+          {!true ? (
             <>
               <Button
                 sx={{ backgroundColor: "primary.dark" }}

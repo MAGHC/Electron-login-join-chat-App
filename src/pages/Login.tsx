@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import { FormControl, Box, TextField, Typography, Button } from "@mui/material";
 import { useState } from "react";
-import { logInWithEmailAndPassword } from "../firebase";
+import { signInWithEmailAndPassword, auth } from "../firebase";
 import Appbar from "../Components/Appbar";
 import { useNavigate } from "react-router";
 
@@ -19,6 +19,16 @@ const Login = () => {
       ...userInputValue,
       [name]: value,
     });
+  };
+
+  const logInWithEmailAndPassword = async (email: string, password: string) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password).then(() => {
+        navigate("/chatmain");
+      });
+    } catch (err) {
+      if (err instanceof Error) alert(err.message);
+    }
   };
 
   const Validation = userInputValue.id && userInputValue.pw.length > 6;

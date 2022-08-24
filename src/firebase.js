@@ -31,15 +31,15 @@ const db = getFirestore(app);
 
 //로그인 , 로그아웃 , 회원가입
 
-const logInWithEmailAndPassword = async (email, password) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password).then(() => {
-      window.location.href = "/chatmain";
-    });
-  } catch (err) {
-    alert(err.message);
-  }
-};
+// const logInWithEmailAndPassword = async (email, password) => {
+//   try {
+//     await signInWithEmailAndPassword(auth, email, password).then(() => {
+//       window.location.href = "/chatmain";
+//     });
+//   } catch (err) {
+//     alert(err.message);
+//   }
+// };
 const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -174,6 +174,7 @@ const getUserList = async (setData) => {
 // };
 
 export {
+  signInWithEmailAndPassword,
   getChannel,
   addChaanel,
   getMessages,
@@ -181,7 +182,6 @@ export {
   sendMessgae,
   auth,
   db,
-  logInWithEmailAndPassword,
   registerWithEmailAndPassword,
   sendPasswordReset,
   logout,

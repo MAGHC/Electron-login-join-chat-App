@@ -5,7 +5,8 @@ import UserList from "../Components/UserList";
 import { Box, Paper, Button, Card, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getMessages, addChaanel, getChannel, getUserList } from "../firebase";
-import Auth from "../Auth";
+// import { useAuth } from "../Auth";
+// import Auth from "../Auth";
 
 type TypeUserList = {
   name: string;
@@ -26,11 +27,13 @@ const ChatMain = () => {
 
   // auth user
 
-  useEffect(() => {
-    Auth(setUserState);
-  }, [userState]);
+  // useEffect(() => {
+  //   Auth(setUserState);
+  // }, [userState]);
 
   // data
+
+  // let auth = useAuth();
 
   useEffect(() => {
     getMessages(setMessages, changedChannel);
@@ -64,7 +67,7 @@ const ChatMain = () => {
   };
   const searchUserName = userList.filter((user: TypeUserList) => user.name.includes(searchUser));
 
-  console.log(channels);
+  // console.log(auth.isAuthenticated);
   return (
     <Box display="flex" width="100vw" height="100vh">
       {modalStatus && userList && (
