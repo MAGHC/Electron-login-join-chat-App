@@ -5,8 +5,7 @@ import UserList from "../Components/UserList";
 import { Box, Paper, Button, Card, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getMessages, addChaanel, getChannel, getUserList } from "../firebase";
-// import { useAuth } from "../Auth";
-// import Auth from "../Auth";
+import { useAuth } from "../Auth";
 
 type TypeUserList = {
   name: string;
@@ -26,14 +25,13 @@ const ChatMain = () => {
   const [searchUser, setSearchUser] = useState("");
 
   // auth user
+  let auth = useAuth();
 
-  // useEffect(() => {
-  //   Auth(setUserState);
-  // }, [userState]);
+  useEffect(() => {
+    setUserState(auth.currentUser);
+  }, [userState]);
 
   // data
-
-  // let auth = useAuth();
 
   useEffect(() => {
     getMessages(setMessages, changedChannel);
