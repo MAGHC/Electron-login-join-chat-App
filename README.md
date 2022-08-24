@@ -17,6 +17,7 @@ firebase 와 react (withTs)를 활용한 백엔드 프론트엔드 구현 =>  �
 
 2022.08.22 - userList 불러오기 / 로그인시 user id/ name / email 정보만 따로 users 생성하여 저장 / test modal view 구현  현재 체크 해서 value 전송해서 초기 채널 init 시에 초대되어있다면 채팅방 자동 생성 되어있게 끔 구현중 , 방식 생각 중 user list 데려올때 자기 자신 달라보이게 끔 하기 등등 아직 많이 남음 
 
+22.8.24 - auth provider 문제 context api 사용으로 해결 및 auth 상태에따른 redirect 및 해당 부분으로 구현된 부분들 fix 
 
 
 <br><br><br>
@@ -37,14 +38,15 @@ firebase 와 react (withTs)를 활용한 백엔드 프론트엔드 구현 =>  �
 ## 현재 폴더 트리 
 
 ```
-
 📦src
  ┣ 📂Components
  ┃ ┣ 📜Appbar.tsx
  ┃ ┣ 📜Channel.tsx
  ┃ ┣ 📜Message.tsx
- ┃ ┗ 📜SendChat.tsx
+ ┃ ┣ 📜SendChat.tsx
+ ┃ ┗ 📜UserList.tsx
  ┣ 📂pages
+ ┃ ┣ 📜AuthValidPage.tsx
  ┃ ┣ 📜ChatMain.tsx
  ┃ ┣ 📜Join.tsx
  ┃ ┗ 📜Login.tsx
@@ -157,6 +159,8 @@ const registerWithEmailAndPassword = async (name, email, password) => {
 
 ### ChatMain 
 
+auth 인증상태 에 따른 redirect 처리 / context api 사용 한 user 정보 처리 
+
 
 
 
@@ -195,6 +199,10 @@ https://user-images.githubusercontent.com/89845540/186070510-a42fa895-6a2d-4c78-
 
 <b>2. 인증 유지 / provider</b>
 
+
+<details>
+<summary>이전 미결사항(해결) </summary>
+
 아직도 사실 이부분의 조금 미결이라는 생각 이 드는 데 맨 처음에는 login 후 res 객체에 token을 뺴내서 view를 구현하고 바꿨는데 
 사실 만약 유저가 token 이라는 것의 존재를 알고 localstorage를 조작할줄안다면 거기에 token 값이 유효하던 말던 그냥 token 만 넣어도 로그인이 되는거나 마찬가지여서 이 부분이 마음에 들지 않아 변경 하게 되었고 좀 더 공부하고 싶은 생각이들었다. 
 
@@ -205,6 +213,108 @@ session stroage 나 refresh token 같은것들의 개념은 알고 있고 fireba
 현재 
 
 원래는 인증상태를 전체에 BrowserRouter 마냥 provider 시키고 싶었는데 현재는 유저 정보를 hook 마냥 auth를  만들어서 import 하여 사용하고 있다. redux를 사용하여 store 에 저장시켜놓고 쓰면 지금보다는 나은 상태가 되겠다 하는 생각은 들지만 현재는 엄청 복잡한 구조가 아니라 당장에는 지금 같은 상태로 훅을 통해 유저 로그인 상태 정보 객체를 불러오고 logout 시키고있다. 결과적으로는 초기 token 을 저장시키는 것보다는 굉장히 좀 더 인증스러워졌지만 많이 부족함을 느낀다. <br><br>
+
+</details>
+
+
+provider 가 개인적인 blocker 였는데 react-router의 공식홈페이지에 authentication 의 구현 방법이 있었다. 물론 한 몇시간 동안 혼자 보면서 적용해야 됬지만 
+
+결론적으로 context api를 사용하여 구현했다.
+
+```Tsx
+
+src/auth 파일 
+
+
+interface AuthContextType {
+  isAuthenticated: Boolean;
+  currentUser: {};
+}
+
+let AuthContext = createContext<AuthContextType>(null!);
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [currentUser, setCurrentUser] = useState({});
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      setCurrentUser(user.providerData[0]);
+      setIsAuthenticated(true);
+    } else {
+      setCurrentUser({});
+      setIsAuthenticated(false);
+    }
+  });
+
+  return <AuthContext.Provider value={{ currentUser, isAuthenticated }}>{children}</AuthContext.Provider>;
+};
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
+
+```
+
+
+<br>
+<br>
+
+- navigate 
+
+<br>
+<br>
+
+원래 firebase 쪽에서 login 시 method 가 실행되기때문에 windowloaction 주소를 firebase에서 react navigate 같은 함수를 사용하지않고 
+
+이동시켰는데 auth Provider와 validPage의 리다이렉트가 제대로 작동하지않았다. 정확히는 로그인 이 되고 콜백이 전부 되고 이동이 되어야 되는데 그전에 컴포넌트가 들어가다보니 상태변화를 인지못하고 바로 redirect 시켜버리는것이였다.
+
+그래서 firebase 함수는 firebase.js에서 다 관리해야지 해서 만들어둔 분리였지만 따로 빼내어서 Login 쪽으로 옮겨 navigate를 시켜주었다
+
+왜 굳이 navigate 같은 함수들을 써야되는지 알 수 있었던 좋은 경험이였다.
+
+<br>
+<br>
+
+
+- children 
+
+<br>
+<br>
+
+공식 예제대로 내것에 적용하는 도중 
+
+![image](https://user-images.githubusercontent.com/89845540/186393850-76f6579e-4601-4c0c-ad83-f91cb7fb893d.png)
+
+Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes'.ts(
+
+라는 에러가 떠서 당황했는데 
+<br>
+<br>
+
+props 해줄게없는데 children 을 쓰고 있을때 나오는 에러라고한다. 
+
+알고보니 validPage에서 else children 을 해줘야되는걸 빈 걸로 하면 알아서 밑으로 내려가겠지 하고 <></> 로 퉁쳐버린 탓이였다 
+
+
+그것도 모르고
+
+![image](https://user-images.githubusercontent.com/89845540/186393922-1d5f5028-6298-40d5-b9ad-8e638eab6e48.png)
+
+이렇게 하니까 에러 사라진다! 하고 잠깐 좋아했었다 
+
+
+
+사실 우여곡절이긴 했지만 react-router 공식홈페이지에 데모 시연되어있는 것을 참고로 해서 했기 때문에 대부분 좀 더 오래 코드를 뜯어보고있으면 다 해결되었다. 
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+
 
 
 ### -FIREBASE FIRESTORE
@@ -368,12 +478,12 @@ yarn-electorn-start 하니까 프로그램 창 마냥 떳던것이 굉장히 신
 * 공통: 급하게 구현 하느라 신경쓰지 못한 부분들의 정리 및 변경 
 
 1. 기능 추가에 따른 message 객체 변경 (이미지 업로드 등등)
-2. 유저리스트 불러오기 
+2. ~ 유저리스트 불러오기 ~
 3. 채널에 user 동적 추가 로 인한 1:1/ 단체 채널 생성 => 그에 따른 채널 에대한 class 도 변경될수있을것같다 
-4. provider 좀 더 공부해서 구현 해보기 (or Redux) /router 접근 
+4. ~ provider 좀 더 공부해서 구현 해보기 (or Redux) /router 접근 ~ 
 5. 현재 로딩 상태 같은 것들은 구현하지 않았는데 그 부분 고려 
 6. ui 고도화
-7. 사용 자 편의를 위한 enter 키 처리 및 navigate 
+7. 사용 자 편의를 위한 처리안하고 그냥 넘어갔던 자잘한 기능들 수리 
 
 
 
