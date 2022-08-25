@@ -39,8 +39,7 @@ firebase 와 react (withTs)를 활용한 백엔드 프론트엔드 구현 =>  �
 
 ## 현재 폴더 트리 
 
-```
-📦src
+```📦src
  ┣ 📂Components
  ┃ ┣ 📜Appbar.tsx
  ┃ ┣ 📜Channel.tsx
@@ -51,7 +50,8 @@ firebase 와 react (withTs)를 활용한 백엔드 프론트엔드 구현 =>  �
  ┃ ┣ 📜AuthValidPage.tsx
  ┃ ┣ 📜ChatMain.tsx
  ┃ ┣ 📜Join.tsx
- ┃ ┗ 📜Login.tsx
+ ┃ ┣ 📜Login.tsx
+ ┃ ┗ 📜NotFound.tsx
  ┣ 📜Auth.tsx
  ┣ 📜firebase.js
  ┣ 📜index.tsx
@@ -59,7 +59,7 @@ firebase 와 react (withTs)를 활용한 백엔드 프론트엔드 구현 =>  �
  ┣ 📜reportWebVitals.ts
  ┣ 📜Router.tsx
  ┗ 📜setupTests.ts
-
+ 
 ```
 
 
