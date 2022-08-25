@@ -17,8 +17,10 @@ firebase 와 react (withTs)를 활용한 백엔드 프론트엔드 구현 =>  �
 
 2022.08.22 - userList 불러오기 / 로그인시 user id/ name / email 정보만 따로 users 생성하여 저장 / test modal view 구현  현재 체크 해서 value 전송해서 초기 채널 init 시에 초대되어있다면 채팅방 자동 생성 되어있게 끔 구현중 , 방식 생각 중 user list 데려올때 자기 자신 달라보이게 끔 하기 등등 아직 많이 남음 
 
-22.8.24 - auth provider 문제 context api 사용으로 해결 및 auth 상태에따른 redirect 및 해당 부분으로 구현된 부분들 fix 
+2022.8.24 - auth provider 문제 context api 사용으로 해결 및 auth 상태에따른 redirect 및 해당 부분으로 구현된 부분들 fix 
 
+
+2022.8.25 - NotFounPage router에 추가 접속시 main 으로 redirect 
 
 <br><br><br>
 
