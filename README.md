@@ -22,6 +22,10 @@ firebase 와 react (withTs)를 활용한 백엔드 프론트엔드 구현 =>  �
 
 2022.8.25 - NotFounPage router에 추가 접속시 main 으로 redirect 
 
+~2022.8.30 -  다이어그램 작성 및 채널 init 이나 접근 방법에 대해서 다시 생각해보는 중 
+
+![image](https://user-images.githubusercontent.com/89845540/187358570-3c7fc3a8-77eb-47d8-a7e5-930d6a87a2d5.png)
+
 <br><br><br>
 
 ## 사용기술 
