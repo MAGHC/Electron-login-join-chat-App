@@ -24,6 +24,8 @@ firebase 와 react (withTs)를 활용한 백엔드 프론트엔드 구현 =>  �
 
 ~2022.8.30 -  다이어그램 작성 및 채널 init 이나 접근 방법에 대해서 다시 생각해보는 중 
 
+22.8.31 - 채널생성시 유저 넣는 작업 등이 매끄럽지 못한 이유가 백엔드 적인 지식의 부족이라 firebase 활용이 매끄럽지 못하다 판단하여 nodejs 공부중 (잠시 중단)
+
 ![image](https://user-images.githubusercontent.com/89845540/187358570-3c7fc3a8-77eb-47d8-a7e5-930d6a87a2d5.png)
 
 <br><br><br>
