@@ -10,6 +10,17 @@ contextApi 를 활용한 auth 구현
 
 <br><br><br>
 
+## 설계 명세서 
+
+<ul>
+
+<li><a href="https://docs.google.com/document/d/1524NybJ5PFXVgdLDftzSWWXDl2hPoK5_9bkA7v_Uixc/edit?usp=sharing">기술 설계 문서</a></li>
+<li><a href="#">스토리북(추가예정) </a></li>
+
+</ul>
+
+<br>
+<br>
 
 ## 진행 사항 
   ~2022.08.15- 기본 electron 세팅 및 mui 사용 login / join 페이지 생성 기본 디자인 <br><br>
@@ -28,6 +39,8 @@ contextApi 를 활용한 auth 구현
 ~2022.8.30 -  다이어그램 작성 및 채널 init 이나 접근 방법에 대해서 다시 생각해보는 중 
 
 22.8.31 - 채널생성시 유저 넣는 작업 등이 매끄럽지 못한 이유가 백엔드 적인 지식의 부족이라 firebase 활용이 매끄럽지 못하다 판단하여 nodejs 공부 병행중 
+
+22.9.20 - 기술 설계부터 재 작성 및 문서화 적용 하여 다시 시작 
 
 ![image](https://user-images.githubusercontent.com/89845540/187358570-3c7fc3a8-77eb-47d8-a7e5-930d6a87a2d5.png)
 
